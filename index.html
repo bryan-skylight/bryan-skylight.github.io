@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <div class="modal fade" id="tableNameModal" aria-labelledby="tableNameModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Table Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please enter the name of the table you'd like to create:</p>
+                    <input id="table-name" type="text" placeholder="my_new_table" autofocus />
+                    <p id="table-name-warning">Table names may only include upper and lower case letters and an
+                        underscore</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="handle_table_name_modal_cancel()">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="table-name-submit"
+                        onclick="handle_table_name_modal_submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteTableModal" tabindex="-1" aria-labelledby="deleteTableModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deletionModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this table? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="hide_modal('deleteTableModal')">Cancel</button>
+                    <button type="button" id="confirm-delete" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="nav" class="row">
+            <div class="col-md-12">
+                <p><strong>PHDI Interactive Schema Developer</strong></p>
+            </div>
+        </div>
+        <div id="main" class="row">
+            <div id="sidebar" class="col-md-3">
+                <div id="sidebar-header" class="row">
+                    <div class="col-md-6 offset-md-5">
+                        <button id="add-table" class="action-button" type="button" data-bs-toggle="modal"
+                            data-bs-target="#tableNameModal" title="Add a new table to your schema">Add
+                            Table</button>
+                    </div>
+                </div>
+                <div id="table-cards" class="container"></div>
+                <div id="sidebar-footer" class="row">
+                    <div class="col-md-5 offset-md-1">
+                        <button id="upload-schema" class="action-button" type="button"
+                            title="Upload an existing schema in order to modify it">Upload Schema</button>
+                    </div>
+                    <div class="col-md-5">
+                        <button id="download-schema" class="action-button" type="button"
+                            title="Download the schema you've built">Download Schema</button>
+                    </div>
+                </div>
+            </div>
+            <div id="canvas" class="col-md-9">
+                <p>WORLD!</p>
+            </div>
+        </div>
+    </div>
+</body>
