@@ -12,8 +12,9 @@ document.addEventListener("click", function (event) {
     // when a resource is clicked, we want to display all of the fields available
     // in that resource
     if (event.target.classList.contains("resource-link")) {
-        clear_fields();
-        load_fields(event.target.title);
+        hide_all_tables();
+        let _id = generate_id_from_string(event.target.title, "fields");
+        show_table(_id);
     }
 })
 

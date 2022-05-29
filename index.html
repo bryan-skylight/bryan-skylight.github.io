@@ -4,7 +4,12 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/mappings.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/fields.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/tables.js"></script>
+    <script src="js/listeners.js"></script>
 </head>
 
 <body>
@@ -109,7 +114,9 @@
                             <table id="fields-table">
                                 <thead>
                                     <tr class="field-header">
-                                        <th title="Select or deselect all fields"><input type="checkbox"></th>
+                                        <th title="Select or deselect all fields"><input id="select-all"
+                                                onclick="toggle_checkboxes()" type="checkbox">
+                                        </th>
                                         <th title="The name of the field according to the FHIR specification">
                                             Field<br />Name
                                         </th>
@@ -128,7 +135,6 @@
                                             New<br />Name</th>
                                     </tr>
                                 </thead>
-                                <tbody id="field-rows"></tbody>
                             </table>
                         </div>
                     </div>

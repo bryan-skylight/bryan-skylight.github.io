@@ -2,27 +2,29 @@
 // as well as the functionality necessary to filter which fields are shown and which ones
 // are. It also generates all of the DOM elements.
 
-function generate_field_row(field, i) {
-    const row = document.createElement("tr");
-    row.classList.add("field-row");
+function generate_checkbox() {
+    const cell = document.createElement("td");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    cell.appendChild(checkbox);
 
-    const cell1 = document.createElement("td");
-    const cell2 = document.createElement("td");
-    const cell3 = document.createElement("td");
-    const cell4 = document.createElement("td");
-    const cell5 = document.createElement("td");
-    const cell6 = document.createElement("td");
+    return cell;
+}
 
-    const checkbox1 = document.createElement("input");
-    const checkbox2 = document.createElement("input");
-    const checkbox3 = document.createElement("input");
-    checkbox1.type = "checkbox";
-    checkbox2.type = "checkbox";
-    checkbox3.type = "checkbox";
+function generate_field_name(field) {
+    const field_name = document.createElement("td");
+    field_name.innerHTML = field;
 
+    return field_name
+}
+
+function generate_value_dropdown() {
+    const uuid = generate_uuid();
+
+    const cell = document.createElement("td");
     const dropdown = document.createElement("select");
     dropdown.name = "values";
-    dropdown.id = "values-".concat(i.toString());
+    dropdown.id = uuid;
 
     let options = ["first", "last", "arbitrary", "all"];
     for (var val of options) {
@@ -31,60 +33,75 @@ function generate_field_row(field, i) {
         option.text = val.charAt(0).toUpperCase() + val.slice(1);
         dropdown.appendChild(option);
     }
-    const label = document.createElement("label");
-    label.innerHTML = "Choose which value to use";
-    label.htmlFor = "values-".concat(i.toString());
+    cell.appendChild(dropdown)
 
-    const text = document.createElement("input");
-    text.classList.add("name-override");
-    text.type = "text";
+    return cell
+}
 
-    cell1.appendChild(checkbox1);
-    cell2.innerHTML = field;
-    cell3.appendChild(checkbox2);
-    cell4.appendChild(checkbox3);
-    cell5.appendChild(dropdown);
-    cell6.appendChild(text);
+function generate_new_name_input() {
+    const cell = document.createElement("td");
+    const text_input = document.createElement("input");
+    text_input.type = "text";
+    text_input.classList.add("name-override");
+    cell.appendChild(text_input);
 
-    row.appendChild(cell1);
-    row.appendChild(cell2);
-    row.appendChild(cell3);
-    row.appendChild(cell4);
-    row.appendChild(cell5);
-    row.appendChild(cell6);
+    return cell
+}
+
+function generate_field_row(field) {
+    const row = document.createElement("tr");
+    row.classList.add("field-row");
+
+    let include_field = generate_checkbox();
+    let field_name = generate_field_name(field);
+    let include_nulls = generate_checkbox();
+    let include_unknowns = generate_checkbox();
+    let value = generate_value_dropdown();
+    let new_name_input = generate_new_name_input();
+    row.appendChild(include_field);
+    row.appendChild(field_name);
+    row.appendChild(include_nulls);
+    row.appendChild(include_unknowns);
+    row.appendChild(value);
+    row.appendChild(new_name_input);
+
     return row;
 }
 
 function generate_field_table(resource) {
     let fields = FIELD_MAP[resource];
-    let idx = 0;
     var row;
 
-    const tbody = document.createElement("tbody");
-    resource = resource.toLowercase().replace(" ", "-");
-    tbody.id = resource.concat("-fields");
-    tbody.classList.add("field-rows");
+    const table = document.createElement("tbody");
+    table.id = generate_id_from_string(resource, suffix = "fields");
+    table.classList.add("field-rows");
+    table.style.display = "none";
 
     for (var field of Object.keys(fields)) {
-        row = generate_field_row(field, idx);
-        const tr = document.createElement("tr");
-        tr.appendChild(row);
-        tbody.appendChild(tr);
-        idx++;
+        row = generate_field_row(field);
+        table.appendChild(row);
     }
+
+    return table;
 }
 
 function generate_all_field_tables() {
-    const table = document.getElementById("fields-table");
+    const table_container = document.getElementById("fields-table");
 
     for (var key of Object.keys(FIELD_MAP)) {
-
+        let table = generate_field_table(key);
+        table_container.appendChild(table);
     }
 }
 
-function clear_fields() {
-    const field_rows = document.getElementById("field-rows");
-    while (field_rows.firstChild) {
-        field_rows.removeChild(field_rows.firstChild);
+function hide_all_tables() {
+    const tables = document.getElementsByClassName("field-rows");
+    for (let i = 0; i < tables.length; i++) {
+        tables[i].style.display = "none";
     }
+}
+
+function show_table(_id) {
+    const table = document.getElementById(_id);
+    table.style.display = "";
 }

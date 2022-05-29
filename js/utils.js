@@ -16,6 +16,17 @@ function toggle_checkboxes() {
     }
 }
 
+// making this a function so that it's more clear what it's doing in the code
+function generate_uuid() {
+    return crypto.randomUUID();
+}
+
+function generate_id_from_string(string, suffix = "") {
+    let uid = string.toLowerCase().replace(" ", "-");
+    uid = suffix != "" ? uid + "-" + suffix : uid;
+    return uid
+}
+
 // utility functions for handling modals
 function show_modal(modal_id) {
     let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(modal_id));
