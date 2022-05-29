@@ -198,3 +198,15 @@ table tr:nth-child(even) {
     border-bottom: 1px solid #000;
     background-color: transparent;
 }
+
+.active {
+    background-color: #074b69;
+}
+
+.active a {
+    color: #fff;
+}
+
+.active a:hover {
+    color: #fff;
+}

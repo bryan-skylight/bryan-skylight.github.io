@@ -10,11 +10,14 @@ document.addEventListener("click", function (event) {
     }
 
     // when a resource is clicked, we want to display all of the fields available
-    // in that resource
+    // in that resource, as well as highlight which resource the user is currently viewing
     if (event.target.classList.contains("resource-link")) {
+        let resource = event.target.title;
+        let _id = generate_id_from_string(resource, "table");
+
         hide_all_tables();
-        let _id = generate_id_from_string(event.target.title, "table");
         show_table(_id);
+        event.target.parentNode.classList.add("active");
     }
 })
 
