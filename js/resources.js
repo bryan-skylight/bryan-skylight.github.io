@@ -22,3 +22,11 @@ function generate_resources() {
         }
     }
 }
+
+function remove_all_highlights() {
+    const resources = document.getElementsByClassName("resource");
+    for (let i = 0; i < resources.length; i++) {
+        console.log(resources[i].classList);
+        resources[i].classList.remove("active");
+    }
+}

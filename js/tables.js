@@ -4,10 +4,11 @@
 // to display the list of saved tables.
 
 let UNIQ_TABLE_ID = 1;
-let DATA_CHANGED = false;
+let SAVED_TABLES = {};
+let CURRENT_TABLE = {};
 
 function save_schema() {
-    if (DATA_CHANGED) {
+    if (Object.keys(CURRENT_TABLE).length > 0) {
         show_modal("tableNameModal");
     } else {
         show_modal("unchangedDataModal");

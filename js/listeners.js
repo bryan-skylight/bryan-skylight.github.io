@@ -17,6 +17,7 @@ document.addEventListener("click", function (event) {
 
         hide_all_tables();
         show_table(_id);
+        remove_all_highlights();
         event.target.parentNode.classList.add("active");
     }
 })
