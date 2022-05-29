@@ -162,7 +162,7 @@ body {
     overflow-y: auto;
 }
 
-#fields-table {
+#fields table {
     width: 100%;
     text-align: center;
     vertical-align: middle;

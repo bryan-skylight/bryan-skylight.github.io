@@ -13,7 +13,7 @@ document.addEventListener("click", function (event) {
     // in that resource
     if (event.target.classList.contains("resource-link")) {
         hide_all_tables();
-        let _id = generate_id_from_string(event.target.title, "fields");
+        let _id = generate_id_from_string(event.target.title, "table");
         show_table(_id);
     }
 })

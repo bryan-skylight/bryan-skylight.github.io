@@ -22,7 +22,7 @@ function generate_uuid() {
 }
 
 function generate_id_from_string(string, suffix = "") {
-    let uid = string.toLowerCase().replace(" ", "-");
+    let uid = string.toLowerCase().replace(/ /g, "-");
     uid = suffix != "" ? uid + "-" + suffix : uid;
     return uid
 }
