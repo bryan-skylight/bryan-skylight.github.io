@@ -4,6 +4,15 @@
 // to display the list of saved tables.
 
 let UNIQ_TABLE_ID = 1;
+let DATA_CHANGED = false;
+
+function save_schema() {
+    if (DATA_CHANGED) {
+        show_modal("tableNameModal");
+    } else {
+        show_modal("unchangedDataModal");
+    }
+}
 
 function save_table(name) {
     const table_card_row = document.createElement("div");
