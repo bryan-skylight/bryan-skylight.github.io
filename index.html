@@ -56,9 +56,9 @@
             </div>
         </div>
         <div id="main" class="row">
-            <div id="sidebar" class="col-md-3">
+            <div id="sidebar" class="col-md-2">
                 <div id="sidebar-header" class="row">
-                    <div class="col-md-6 offset-md-5">
+                    <div class="col-md-6">
                         <button id="add-table" class="action-button" type="button" data-bs-toggle="modal"
                             data-bs-target="#tableNameModal" title="Add a new table to your schema">Add
                             Table</button>
@@ -76,8 +76,63 @@
                     </div>
                 </div>
             </div>
-            <div id="canvas" class="col-md-9">
-                <p>WORLD!</p>
+            <div id="canvas" class="col-md-10">
+                <div id="resource-container" class="container">
+                    <div id="resource-row" class="row">
+                        <div id="resources" class="col-md-3">
+                            <ul id="individuals" class="resource-list">Individuals</ul>
+                            <ul id="entities-1" class="resource-list">Entities #1</ul>
+                            <ul id="entities-2" class="resource-list">Entities #2</ul>
+                            <ul id="workflow" class="resource-list">Workflow</ul>
+                            <ul id="management" class="resource-list">Management</ul>
+                            <ul id="summary" class="resource-list">Summary</ul>
+                            <ul id="diagnostics" class="resource-list">Diagnostics</ul>
+                            <ul id="medications" class="resource-list">Medications</ul>
+                            <ul id="care-provision" class="resource-list">Care Provision</ul>
+                            <ul id="request-response" class="resource-list">Request & Response</ul>
+                            <ul id="support" class="resource-list">Support</ul>
+                            <ul id="billing" class="resource-list">Billing</ul>
+                            <ul id="payment" class="resource-list">Payment</ul>
+                            <ul id="general" class="resource-list">General</ul>
+                            <ul id="conformance" class="resource-list">Conformance</ul>
+                            <ul id="terminology" class="resource-list">Terminology</ul>
+                            <ul id="security" class="resource-list">Security</ul>
+                            <ul id="documents" class="resource-list">Documents</ul>
+                            <ul id="other" class="resource-list">Other</ul>
+                            <ul id="public-health-research" class="resource-list">Public Health & Research</ul>
+                            <ul id="definitional-artifacts" class="resource-list">Definitional Artifacts</ul>
+                            <ul id="evidence-based-medicine" class="resource-list">Evidence-Based Medicine</ul>
+                            <ul id="quality-reporting-testing" class="resource-list">Quality Reporting & Testing</ul>
+                            <ul id="medication-definition" class="resource-list">Medication Definition</ul>
+                        </div>
+                        <div id="fields" class="col-md-9">
+                            <table id="fields-table">
+                                <thead>
+                                    <tr class="field-header">
+                                        <th title="Select or deselect all fields"><input type="checkbox"></th>
+                                        <th title="The name of the field according to the FHIR specification">
+                                            Field<br />Name
+                                        </th>
+                                        <th title="Should records with missing values in this field be included?">
+                                            Include
+                                            <br />Nulls
+                                        </th>
+                                        <th title="Should values of 'UNKNOWN' be treated as valid data?">
+                                            Include<br />Unknowns
+                                        </th>
+                                        <th
+                                            title="If the field contains multiple values, which value should be returned?">
+                                            Value</th>
+                                        <th
+                                            title="Do you want to rename the field? If not, the default name will be used">
+                                            New<br />Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="field-rows"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

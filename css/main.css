@@ -70,7 +70,7 @@ body {
     border-radius: 5px;
     background-color: #074b69;
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     margin-top: 5px;
     width: 100%;
@@ -79,6 +79,7 @@ body {
 #table-cards {
     height: 92%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .table-card {
@@ -89,6 +90,11 @@ body {
     border-style: solid;
     height: 5%;
     margin-top: 5px;
+}
+
+.table-header {
+    padding-left: 0;
+    text-align: right;
 }
 
 .delete-button {
@@ -108,6 +114,77 @@ body {
     height: 3%;
 }
 
-#canvas {
+#canvas,
+#resource-container,
+#resource-row,
+#resources,
+#fields {
     height: 100%;
+}
+
+#resources {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.resource-list {
+    width: 100%;
+    font-weight: bold;
+    padding-left: 0;
+    padding-top: 10px;
+    word-wrap: break-word;
+}
+
+
+.resource {
+    background-color: #fff;
+    color: #555;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+    margin-left: 1.5rem;
+    word-wrap: break-word;
+}
+
+.resource-link {
+    width: 100%;
+    text-decoration: none;
+    color: #555;
+    word-wrap: break-word;
+}
+
+.resource-link:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+#fields {
+    overflow-y: auto;
+}
+
+#fields-table {
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.field-header {
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.field-header>th {
+    position: sticky;
+}
+
+.field-row {
+    vertical-align: middle;
+    margin-top: 0.5rem;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    padding-left: 1rem;
+    text-align: left;
 }
