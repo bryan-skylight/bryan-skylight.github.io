@@ -97,7 +97,8 @@ body {
     text-align: right;
 }
 
-.delete-button {
+.delete-button,
+.edit-button {
     height: 1rem;
     width: 1rem;
     background-color: transparent;
@@ -105,7 +106,8 @@ body {
     border: none;
 }
 
-.delete-icon {
+.delete-icon,
+.edit-icon {
     height: 1rem;
     width: 1rem;
 }

@@ -5,7 +5,7 @@
 
 let UNIQ_TABLE_ID = 1;
 let SAVED_TABLES = {};
-let CURRENT_TABLE = {};
+let CURRENT_TABLE = { "patient": [] };
 
 function save_schema() {
     if (Object.keys(CURRENT_TABLE).length > 0) {
@@ -58,25 +58,45 @@ function create_table_card() {
 
 function create_table_card_header() {
     const header = document.createElement("div");
-    const header_col = document.createElement("div");
+    const delete_col = document.createElement("div");
     const delete_button = document.createElement("button");
-    const icon = document.createElement("img");
+    const delete_icon = document.createElement("img");
+    const edit_col = document.createElement("div");
+    const edit_button = document.createElement("button");
+    const edit_icon = document.createElement("img");
 
     header.classList.add("row");
-    header_col.classList.add("col-md-2");
-    header_col.classList.add("offset-md-10");
-    header_col.classList.add("table-header");
+
+    // add the edit button
+    edit_col.classList.add("col-md-2");
+    edit_col.classList.add("offset-md-8");
+    edit_button.classList.add("edit-button");
+    edit_button.title = "Make changes to this table.";
+    edit_button.id = "edit-button-".concat(UNIQ_TABLE_ID.toString());
+    edit_icon.classList.add("edit-icon");
+    edit_icon.id = "edit-icon-".concat(UNIQ_TABLE_ID.toString());
+    edit_icon.src = "assets/pencil.svg";
+    edit_icon.alt = "Penicl Icon";
+
+    edit_button.appendChild(edit_icon);
+    edit_col.appendChild(edit_button);
+    header.appendChild(edit_col);
+
+    // add the delete button
+    delete_col.classList.add("col-md-2");
+    delete_col.classList.add("table-header");
     delete_button.classList.add("delete-button");
     delete_button.title = "Remove this table from your schema. Cannot be undone.";
     delete_button.id = "delete-button-".concat(UNIQ_TABLE_ID.toString());
-    icon.classList.add("delete-icon");
-    icon.id = "delete-icon-".concat(UNIQ_TABLE_ID.toString());
-    icon.src = "assets/trash3.svg";
-    icon.alt = "Trash Icon";
+    delete_icon.classList.add("delete-icon");
+    delete_icon.id = "delete-icon-".concat(UNIQ_TABLE_ID.toString());
+    delete_icon.src = "assets/trash3.svg";
+    delete_icon.alt = "Trash Icon";
 
-    delete_button.appendChild(icon);
-    header_col.appendChild(delete_button);
-    header.appendChild(header_col);
+    delete_button.appendChild(delete_icon);
+    delete_col.appendChild(delete_button);
+    header.appendChild(delete_col);
+
     return header
 }
 
