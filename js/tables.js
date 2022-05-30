@@ -30,7 +30,6 @@ function save_table(name) {
 }
 
 function delete_table(elem_id) {
-    console.log(elem_id);
     let id = elem_id.split("-").slice(-1);
     const table_card = document.getElementById("table-".concat(id));
     table_card.remove();

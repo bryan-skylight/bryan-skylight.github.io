@@ -26,6 +26,13 @@ document.addEventListener("click", function (event) {
         remove_all_highlights();
         event.target.parentNode.classList.add("active");
     }
+
+    // when a user clicks the checkbox in the fields table header, it should toggle all
+    // checkboxes in that table
+    if (event.target.id.includes("select-all")) {
+        let resource = event.target.id.split("-")[0];
+        toggle_checkboxes(resource);
+    }
 })
 
 // When a user is entering the name of a new table, they should be able to hit enter

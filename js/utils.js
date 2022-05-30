@@ -9,10 +9,11 @@ function is_valid_name(name) {
     return !valid_pattern.test(name)
 }
 
-function toggle_checkboxes() {
-    const field_rows = document.getElementsByClassName("field-row");
-    for (let i = 0; i < field_rows.length; i++) {
-        field_rows[i].firstChild.firstChild.checked = !(field_rows[i].firstChild.firstChild.checked);
+function toggle_checkboxes(resource) {
+    let class_name = resource.concat("-checkbox");
+    const checkboxes = document.getElementsByClassName(class_name);
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = !(checkboxes[i].checked);
     }
 }
 
