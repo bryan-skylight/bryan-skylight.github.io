@@ -7,7 +7,7 @@ let UNIQ_TABLE_ID = 1;
 var SAVED_TABLES = {};
 var CURRENT_TABLE = {};
 
-function save_schema() {
+function check_for_changes() {
     if (Object.keys(CURRENT_TABLE).length > 0) {
         show_modal("tableNameModal");
     } else {
@@ -34,6 +34,45 @@ function delete_table(elem_id) {
     const table_card = document.getElementById("table-".concat(id));
     table_card.remove();
     hide_modal("deleteTableModal");
+}
+
+function add_field_to_table(resource, row_num) {
+    const all_rows = document.getElementById(resource.concat("-fields")).children;
+    const row = all_rows.item(row_num - 1);
+    const fields = row.children;
+    const fhir_name = fields[1].textContent;
+    const new_name = fields[5].firstChild.textContent;
+
+    let parameters = {
+        "include_nulls": fields[2].firstChild.checked,
+        "include_unknowns": fields[3].firstChild.checked,
+        "value": fields[4].firstChild.value,
+        "new_name": is_valid_name(new_name) ? new_name : fhir_name.toLowerCase()
+    };
+
+    resource = title_case(resource);
+    if (!(resource in CURRENT_TABLE)) {
+        CURRENT_TABLE[resource] = {};
+    }
+    CURRENT_TABLE[resource][fhir_name] = parameters;
+}
+
+function remove_field_from_table(resource, row_num) {
+    const all_rows = document.getElementById(resource.concat("-fields")).children;
+    const row = all_rows.item(row_num - 1);
+    const fields = row.children;
+    const fhir_name = fields[1].textContent;
+
+    resource = title_case(resource);
+    delete CURRENT_TABLE[resource][fhir_name];
+}
+
+function modify_table_fields(is_checked, resource, row_num) {
+    if (is_checked) {
+        add_field_to_table(resource, row_num);
+    } else {
+        remove_field_from_table(resource, row_num);
+    }
 }
 
 // To ensure a user doesn't delete the table accidentally, we'll ask them to confirm
@@ -110,43 +149,4 @@ function create_table_card_body(text) {
     body_col.appendChild(table_name);
     body.appendChild(body_col);
     return body
-}
-
-function add_field_to_table(resource, row_num) {
-    const all_rows = document.getElementById(resource.concat("-fields")).children;
-    const row = all_rows.item(row_num - 1);
-    const fields = row.children;
-    const fhir_name = fields[1].textContent;
-    const new_name = fields[5].firstChild.textContent;
-
-    let parameters = {
-        "include_nulls": fields[2].firstChild.checked,
-        "include_unknowns": fields[3].firstChild.checked,
-        "value": fields[4].firstChild.value,
-        "new_name": is_valid_name(new_name) ? new_name : fhir_name.toLowerCase()
-    };
-
-    resource = title_case(resource);
-    if (!(resource in CURRENT_TABLE)) {
-        CURRENT_TABLE[resource] = {};
-    }
-    CURRENT_TABLE[resource][fhir_name] = parameters;
-}
-
-function remove_field_from_table(resource, row_num) {
-    const all_rows = document.getElementById(resource.concat("-fields")).children;
-    const row = all_rows.item(row_num - 1);
-    const fields = row.children;
-    const fhir_name = fields[1].textContent;
-
-    resource = title_case(resource);
-    delete CURRENT_TABLE[resource][fhir_name];
-}
-
-function modify_table_fields(is_checked, resource, row_num) {
-    if (is_checked) {
-        add_field_to_table(resource, row_num);
-    } else {
-        remove_field_from_table(resource, row_num);
-    }
 }

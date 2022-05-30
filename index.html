@@ -54,6 +54,24 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="notImplementedModal" tabindex="-1" aria-labelledby="notImplementedLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notImplementedLabel">Not Implemented</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This functionality is not currently implemented. Please check back later for future updates.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                        onclick="hide_modal('notImplementedModal')">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="unchangedDataModal" tabindex="-1" aria-labelledby="unchangedDataModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-md">
@@ -83,7 +101,7 @@
             <div id="sidebar" class="col-md-2">
                 <div id="sidebar-header" class="row">
                     <div class="col-md-6">
-                        <button id="add-table" class="action-button" type="button" onclick="save_schema()"
+                        <button id="add-table" class="action-button" type="button" onclick="check_for_changes()"
                             title="Save current specifications into a table">Save
                             Table</button>
                     </div>
@@ -92,6 +110,7 @@
                 <div id="sidebar-footer" class="row">
                     <div class="col-md-5 offset-md-1">
                         <button id="upload-schema" class="action-button" type="button"
+                            onclick="show_modal('notImplementedModal')"
                             title="Upload an existing schema in order to modify it">Upload Schema</button>
                     </div>
                     <div class="col-md-5">

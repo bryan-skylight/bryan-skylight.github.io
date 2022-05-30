@@ -12,7 +12,8 @@ document.addEventListener("click", function (event) {
     // if a user attempts to edit an existing table, we should first make sure there are
     // not unsaved changes that have been made
     if (event.target.classList.contains("edit-icon")) {
-        confirm_edit(event.target.id);
+        //confirm_edit(event.target.id);
+        show_modal("notImplementedModal");
     }
 
     // when a resource is clicked, we want to display all of the fields available
