@@ -14,6 +14,26 @@ function title_case(str) {
     });
 }
 
+function extract_elements_from_id(_id, filter_words, get_resource = true, get_row_num = true) {
+    let id_elements = _id.split("-");
+    let filtered_elements = id_elements.filter(function (value, index, arr) {
+        return !(filter_words.includes(value));
+    });
+    let resource = filtered_elements.slice(0, -1).join("-");
+    let row_num = filtered_elements.slice(-1);
+
+    output = [];
+    if (get_resource) {
+        output.push(resource);
+    }
+
+    if (get_row_num) {
+        output.push(row_num);
+    }
+
+    return output
+}
+
 function toggle_checkboxes(resource) {
     let toggle_state = document.getElementById(resource.concat("-select-all")).checked;
     let class_name = resource.concat("-checkbox");

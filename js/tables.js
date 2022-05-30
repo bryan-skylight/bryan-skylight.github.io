@@ -33,7 +33,7 @@ function generate_schema() {
     const checkboxes = document.getElementsByClassName("field-selector");
     for (let i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
-            let [resource, unused, row_num] = checkboxes[i].id.split("-");
+            let [resource, row_num] = extract_elements_from_id(checkboxes[i].id, ["checkbox"]);
             table = add_field_to_table(table, resource, row_num);
         }
     }
@@ -58,16 +58,6 @@ function delete_table(elem_id) {
     const table_card = document.getElementById("table-".concat(id));
     table_card.remove();
     hide_modal("deleteTableModal");
-}
-
-function remove_field_from_table(resource, row_num) {
-    const all_rows = document.getElementById(resource.concat("-fields")).children;
-    const row = all_rows.item(row_num - 1);
-    const fields = row.children;
-    const fhir_name = fields[1].textContent;
-
-    resource = title_case(resource);
-    delete CURRENT_TABLE[resource][fhir_name];
 }
 
 function modify_table_fields(is_checked, resource, row_num) {
