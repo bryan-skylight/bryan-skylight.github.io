@@ -17,7 +17,7 @@ function add_field_to_table(table, resource, row_num) {
         "include_nulls": fields[2].firstChild.checked,
         "include_unknowns": fields[3].firstChild.checked,
         "value": fields[4].firstChild.value,
-        "new_name": is_valid_name(new_name) ? new_name : fhir_name.toLowerCase()
+        "new_name": is_valid_name(new_name) ? new_name : make_valid_name(fhir_name)
     };
 
     resource = title_case(resource);
@@ -55,8 +55,10 @@ function create_new_table(name) {
 
 function delete_table(elem_id) {
     let id = elem_id.split("-").slice(-1);
-    const table_card = document.getElementById("table-".concat(id));
+    const table_card = document.getElementById("table-".concat(id)).parentNode;
+    const table_name = table_card.getElementsByClassName("table-name")[0].textContent;
     table_card.remove();
+    delete SAVED_TABLES[table_name];
     hide_modal("deleteTableModal");
 }
 

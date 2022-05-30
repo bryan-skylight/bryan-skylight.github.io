@@ -8,7 +8,12 @@ function is_valid_name(name) {
     return !valid_pattern.test(name)
 }
 
+function make_valid_name(name) {
+    return name.toLowerCase().replace(/ /g, "_");
+}
+
 function title_case(str) {
+    str = str.replace(/-/g, " ");
     return str.replace(/\w\S*/g, word => {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
