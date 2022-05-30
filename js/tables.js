@@ -42,11 +42,15 @@ function generate_schema() {
 
 function create_new_table(name) {
     const table = generate_schema();
-    console.log(table);
     const table_container = generate_table_container(name);
     document.getElementById("table-cards").appendChild(table_container);
     UNIQ_TABLE_ID++;
     SAVED_TABLES[name] = table;
+
+    // reset the app so the user can start making a new table
+    remove_all_highlights();
+    remove_all_field_tables();
+    generate_all_field_tables();
 }
 
 function delete_table(elem_id) {

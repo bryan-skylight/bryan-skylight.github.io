@@ -183,6 +183,7 @@ body {
 .field-row {
     vertical-align: middle;
     margin-top: 0.5rem;
+    font-size: 16px;
 }
 
 th:nth-child(2),

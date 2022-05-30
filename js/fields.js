@@ -164,6 +164,11 @@ function generate_all_field_tables() {
     }
 }
 
+function remove_all_field_tables() {
+    const tables = document.getElementById("fields");
+    tables.replaceChildren();
+}
+
 function hide_all_tables() {
     const tables = document.getElementById("fields").children;
     for (let i = 0; i < tables.length; i++) {
