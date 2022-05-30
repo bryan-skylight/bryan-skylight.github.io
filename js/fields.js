@@ -2,20 +2,66 @@
 // as well as the functionality necessary to filter which fields are shown and which ones
 // are. It also generates all of the DOM elements.
 
-function generate_checkbox(class_name = "") {
+function generate_field_table_header(resource) {
+    const thead = document.createElement("thead");
+    const header = document.createElement("tr");
+    header.classList.add("field-header");
+
+    // select all checkbox
+    const select_all = document.createElement("th");
+    select_all.title = "Select or deselect all fields";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = generate_id_from_string(resource, "select-all");
+    checkbox.setAttribute("onclick", `toggle_checkboxes("${resource.toLowerCase()}")`);
+    select_all.append(checkbox);
+
+    // rest of the header fields
+    const field_name = document.createElement("th");
+    field_name.title = "The name of the field according to the FHIR specification";
+    field_name.innerHTML = "Field<br />Name";
+
+    const include_nulls = document.createElement("th");
+    include_nulls.title = "Should records with missing values in this field be included?";
+    include_nulls.innerHTML = "Include<br />Nulls";
+
+    const include_unknowns = document.createElement("th");
+    include_unknowns.title = "Should values of 'UNKNOWN' be treated as valid data?";
+    include_unknowns.innerHTML = "Include<br />Unknowns";
+
+    const value = document.createElement("th");
+    value.title = "If the field contains multiple values, which value should be returned?";
+    value.innerHTML = "Value"
+
+    const new_name = document.createElement("th");
+    new_name.title = "Enter how the name should appear in your new table. If left blank, the default name will be used.";
+    new_name.innerHTML = "New<br />Name";
+
+    header.appendChild(select_all);
+    header.appendChild(field_name);
+    header.appendChild(include_nulls);
+    header.appendChild(include_unknowns);
+    header.appendChild(value);
+    header.appendChild(new_name);
+    thead.appendChild(header);
+
+    return thead
+}
+
+function generate_checkbox(_id = "") {
     const cell = document.createElement("td");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
 
-    // for the checkbox in the first cell, we want to append
-    // a class name so that only the checkboxes for a specific
-    // resource can be targeted by the toggle_checkmarks() function.
-    if (class_name !== "") {
-        checkbox.classList.add(class_name);
+    // a non-empty _id serves as a proxy to signal that
+    // the checkbox is the selection checkbox for the field.
+    if (_id !== "") {
+        checkbox.id = _id;
+        checkbox.classList.add(_id.split("-").slice(0, 2).join("-"));
     }
 
     cell.appendChild(checkbox);
-
     return cell;
 }
 
@@ -56,11 +102,11 @@ function generate_new_name_input() {
     return cell
 }
 
-function generate_field_row(resource, field) {
+function generate_field_row(resource, field, row_num) {
     const row = document.createElement("tr");
     row.classList.add("field-row");
 
-    let class_name = generate_id_from_string(resource, "checkbox");
+    let class_name = generate_id_from_string(resource, `checkbox-${row_num}`);
     let include_field = generate_checkbox(class_name);
     let field_name = generate_field_name(field);
     let include_nulls = generate_checkbox();
@@ -77,54 +123,9 @@ function generate_field_row(resource, field) {
     return row;
 }
 
-function generate_field_table_header(resource) {
-    const thead = document.createElement("thead");
-    const header = document.createElement("tr");
-    header.classList.add("field-header");
-
-    // select all checkbox
-    const select_all = document.createElement("th");
-    select_all.title = "Select or deselect all fields";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = generate_id_from_string(resource, "select-all");
-    select_all.append(checkbox);
-
-    // rest of the header fields
-    const field_name = document.createElement("th");
-    field_name.title = "The name of the field according to the FHIR specification";
-    field_name.innerHTML = "Field<br />Name";
-
-    const include_nulls = document.createElement("th");
-    include_nulls.title = "Should records with missing values in this field be included?";
-    include_nulls.innerHTML = "Include<br />Nulls";
-
-    const include_unknowns = document.createElement("th");
-    include_unknowns.title = "Should values of 'UNKNOWN' be treated as valid data?";
-    include_unknowns.innerHTML = "Include<br />Unknowns";
-
-    const value = document.createElement("th");
-    value.title = "If the field contains multiple values, which value should be returned?";
-    value.innerHTML = "Value"
-
-    const new_name = document.createElement("th");
-    new_name.title = "Enter how the name should appear in your new table. If left blank, the default name will be used.";
-    new_name.innerHTML = "New<br />Name";
-
-    header.appendChild(select_all);
-    header.appendChild(field_name);
-    header.appendChild(include_nulls);
-    header.appendChild(include_unknowns);
-    header.appendChild(value);
-    header.appendChild(new_name);
-    thead.appendChild(header);
-
-    return thead
-}
-
 function generate_field_table_body(resource) {
     let fields = FIELD_MAP[resource];
+    let row_num = 1;
     var row;
 
     const body = document.createElement("tbody");
@@ -132,8 +133,9 @@ function generate_field_table_body(resource) {
     body.classList.add("field-rows");
 
     for (var field of Object.keys(fields)) {
-        row = generate_field_row(resource, field);
+        row = generate_field_row(resource, field, row_num);
         body.appendChild(row);
+        row_num++;
     }
 
     return body;

@@ -1,5 +1,6 @@
 // Utility functions, including functionality for showing, hiding, and handling modals
 // is contained in this file.
+let TOGGLE_STATE = false;
 
 function is_valid_name(name) {
     if (name === "") {
@@ -9,11 +10,21 @@ function is_valid_name(name) {
     return !valid_pattern.test(name)
 }
 
+function title_case(str) {
+    return str.replace(/\w\S*/g, word => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+}
+
 function toggle_checkboxes(resource) {
     let class_name = resource.concat("-checkbox");
     const checkboxes = document.getElementsByClassName(class_name);
+    TOGGLE_STATE = !TOGGLE_STATE;
+
     for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = !(checkboxes[i].checked);
+        if (checkboxes[i].checked != TOGGLE_STATE) {
+            checkboxes[i].click();
+        }
     }
 }
 

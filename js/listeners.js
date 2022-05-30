@@ -27,11 +27,13 @@ document.addEventListener("click", function (event) {
         event.target.parentNode.classList.add("active");
     }
 
-    // when a user clicks the checkbox in the fields table header, it should toggle all
-    // checkboxes in that table
-    if (event.target.id.includes("select-all")) {
-        let resource = event.target.id.split("-")[0];
-        toggle_checkboxes(resource);
+    // when a checkbox is clicked, we want to add that field to the current table if
+    // the checkbox is ticked on, otherwise we want to remove that field from the current
+    // table if the the checkbox is being turned off.
+    if (event.target.classList.contains("patient-checkbox")) {
+        const [resource, unused, row_num] = event.target.id.split("-");
+        let is_checked = event.target.checked;
+        modify_table_fields(is_checked, resource, row_num);
     }
 })
 
