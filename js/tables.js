@@ -27,6 +27,9 @@ function save_table(name) {
     table_card_row.appendChild(table_card);
     document.getElementById("table-cards").appendChild(table_card_row);
     UNIQ_TABLE_ID++;
+
+    SAVED_TABLES[name] = CURRENT_TABLE;
+    CURRENT_TABLE = {};
 }
 
 function delete_table(elem_id) {

@@ -39,6 +39,20 @@ function generate_id_from_string(string, suffix = "") {
     return uid
 }
 
+function download() {
+    const data = JSON.stringify(SAVED_TABLES);
+    const blob = new Blob([data], { type: "text/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    const element = document.createElement("a");
+    element.setAttribute("href", url);
+    element.setAttribute("download", "phdi_generated_schema.json")
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
 // utility functions for handling modals
 function show_modal(modal_id) {
     let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(modal_id));
