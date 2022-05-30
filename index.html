@@ -101,9 +101,12 @@
             <div id="sidebar" class="col-md-2">
                 <div id="sidebar-header" class="row">
                     <div class="col-md-6">
-                        <button id="add-table" class="action-button" type="button" onclick="check_for_changes()"
-                            title="Save current specifications into a table">Save
-                            Table</button>
+                        <button id="save-as" class="action-button" type="button" onclick="check_for_changes()"
+                            title="Save current specifications into a table">Save As</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="save" class="action-button" type="button" onclick="save()" style="display:none"
+                            title="Save current specifications into a table">Save</button>
                     </div>
                 </div>
                 <div id="table-cards" class="container"></div>

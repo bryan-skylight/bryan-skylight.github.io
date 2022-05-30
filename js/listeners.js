@@ -27,15 +27,6 @@ document.addEventListener("click", function (event) {
         remove_all_highlights();
         event.target.parentNode.classList.add("active");
     }
-
-    // when a checkbox is clicked, we want to add that field to the current table if
-    // the checkbox is ticked on, otherwise we want to remove that field from the current
-    // table if the the checkbox is being turned off.
-    if (event.target.classList.contains("patient-checkbox")) {
-        const [resource, unused, row_num] = event.target.id.split("-");
-        let is_checked = event.target.checked;
-        modify_table_fields(is_checked, resource, row_num);
-    }
 })
 
 // When a user is entering the name of a new table, they should be able to hit enter

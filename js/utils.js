@@ -41,7 +41,7 @@ function generate_id_from_string(string, suffix = "") {
 
 function download() {
     const data = JSON.stringify(SAVED_TABLES);
-    const blob = new Blob([data], { type: "text/json;charset=utf-8" });
+    const blob = new Blob([data], { type: "text/json;charset=utf-8" })
     const url = URL.createObjectURL(blob);
 
     const element = document.createElement("a");
@@ -53,7 +53,6 @@ function download() {
     document.body.removeChild(element);
 }
 
-// utility functions for handling modals
 function show_modal(modal_id) {
     let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(modal_id));
     modal.show();
@@ -62,27 +61,4 @@ function show_modal(modal_id) {
 function hide_modal(modal_id) {
     let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(modal_id));
     modal.hide();
-}
-
-function handle_table_name_modal_cancel() {
-    const warning = document.getElementById("table-name-warning");
-    const table_input = document.getElementById("table-name");
-    table_input.value = "";
-    warning.style.display = "none";
-    hide_modal("tableNameModal");
-}
-
-function handle_table_name_modal_submit() {
-    const warning = document.getElementById("table-name-warning");
-    const table_input = document.getElementById("table-name");
-    let table_name = table_input.value;
-
-    if (!is_valid_name(table_name)) {
-        warning.style.display = "block";
-    } else {
-        save_table(table_input.value);
-        warning.style.display = "none";
-        table_input.value = "";
-        hide_modal("tableNameModal");
-    }
 }

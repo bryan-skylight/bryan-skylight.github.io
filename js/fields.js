@@ -59,6 +59,7 @@ function generate_checkbox(_id = "") {
     if (_id !== "") {
         checkbox.id = _id;
         checkbox.classList.add(_id.split("-").slice(0, 2).join("-"));
+        checkbox.classList.add("field-selector");
     }
 
     cell.appendChild(checkbox);
