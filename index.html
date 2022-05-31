@@ -18,7 +18,7 @@
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Table Name</h5>
+                    <h5 class="modal-title" id="tableNameModalLabel">Table Name</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -32,6 +32,44 @@
                         onclick="handle_table_name_modal_cancel()">Cancel</button>
                     <button type="button" class="btn btn-primary" id="table-name-submit"
                         onclick="handle_table_name_modal_submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="helpModal" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel">Instructions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Welcome to the interactive schema generator! This tool is intended to help you get the most out
+                        of your FHIR server by making it easy to generate schemas that specify which Resources you want
+                        data from, which fields you want from those Resources, as well as what conditions you'd like
+                        applied to those fields.</p>
+                    <p>To get started, click on any of the Resources (e.g. Patient) in the list of available FHIR
+                        resources. The Resources are categorized according to <a
+                            href="https://www.hl7.org/fhir/resourcelist.html">the FHIR specification</a> and is intended
+                        to help you quickly locate the Resources you want.</p>
+                    <p>Once you've selected a resource, you'll see a table appear that contains all of the fields
+                        available in that Resource. Click the checkbox next to any field you'd like to include in your
+                        table, and change any of the constraints you'd like to. The Value column allows you to specify
+                        which value for a field should be returned if that field contains multiple values for any given
+                        resource. For example, a Patient resource may have more than one value for race or ethnicity due
+                        to inaccurate data that has come in. You can choose to take the first or last value (these are
+                        not based on any kind of timeframe, but instead refer to where the value is in the list of
+                        values), take an arbitrary value, or get all of the values.</p>
+                    <p>Tables can contain fields from any number of Resources, and your choices are maintained as you
+                        navigate from one resource to another. Once you've identified the fields and constraints that
+                        you want from any of the Resources, click the "Save As" button to create a new table.</p>
+                    <p>After you've created your first table, you can either continue to create tables, or you can click
+                        the "Download Schema" button at the bottom-left of the app to download the schema you've created
+                        in either JSON or YAML file. If you're not sure which format your environment needs, speak with
+                        your FHIR server administrator to find out.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="hide_modal('helpModal')">Got it!</button>
                 </div>
             </div>
         </div>
@@ -141,8 +179,23 @@
     </div>
     <div class="container">
         <div id="nav" class="row">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <p><strong>PHDI Interactive Schema Generator</strong></p>
+            </div>
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="col-md-2 offset-md-3">
+                        <button id="help-button" title="View instructions on how to use this app"
+                            onclick="show_modal('helpModal')">
+                            <img id="help-icon" src="assets/question-circle.svg" alt="Question mark icon">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button id="bug-button" title="Submit a bug or feature request to the developers">
+                            <img id="bug-icon" src="assets/bug.svg" alt="Bug icon">
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="main" class="row">
