@@ -119,6 +119,19 @@ body {
     width: 1rem;
 }
 
+.table-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.table-metadata {
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
 #sidebar-footer {
     height: 3%;
 }

@@ -42,8 +42,16 @@ function generate_schema() {
 
 function create_new_table(name) {
     const table = generate_schema();
-    const table_container = generate_table_container(name);
-    document.getElementById("table-cards").appendChild(table_container);
+    console.log(table);
+    let num_resources = 0;
+    let num_fields = 0;
+    for (let resource of Object.keys(table)) {
+        num_resources++;
+        num_fields += Object.keys(table[resource]).length;
+    }
+
+    const table_card = generate_table_card(name, num_resources, num_fields);
+    document.getElementById("table-cards").appendChild(table_card);
     UNIQ_TABLE_ID++;
     SAVED_TABLES[name] = table;
 
@@ -126,26 +134,28 @@ function check_for_changes() {
 }
 
 // DOM element generation code
-function generate_table_container(name) {
-    const table_container = document.createElement("div");
-    let table_card = generate_table_card();
-    let table_header = generate_table_card_header();
-    let table_body = generate_table_card_body(name);
+function generate_table_card(name, num_resources, num_fields) {
+    const table_card = document.createElement("div");
+    const table_container = generate_table_container();
+    const table_header = generate_table_card_header();
+    const table_body = generate_table_card_body(name);
+    const table_footer = generate_table_card_footer(num_resources, num_fields);
 
-    table_container.classList.add("row");
-    table_card.appendChild(table_header);
-    table_card.appendChild(table_body);
-    table_container.appendChild(table_card);
-    return table_container
+    table_card.classList.add("row");
+    table_container.appendChild(table_header);
+    table_container.appendChild(table_body);
+    table_container.appendChild(table_footer);
+    table_card.appendChild(table_container);
+    return table_card
 }
 
-function generate_table_card() {
-    const table = document.createElement("div");
-    table.classList.add("table-card");
-    table.classList.add("col-md-10");
-    table.classList.add("offset-md-1");
-    table.id = "table-".concat(UNIQ_TABLE_ID.toString());
-    return table
+function generate_table_container() {
+    const container = document.createElement("div");
+    container.classList.add("table-card");
+    container.classList.add("col-md-10");
+    container.classList.add("offset-md-1");
+    container.id = "table-".concat(UNIQ_TABLE_ID.toString());
+    return container
 }
 
 function generate_table_card_header() {
@@ -196,11 +206,33 @@ function generate_table_card_body(text) {
     const body = document.createElement("div");
     const body_col = document.createElement("div");
     const table_name = document.createElement("p");
-    table_name.innerHTML = text;
+
     body.classList.add("row");
     body_col.classList.add("col-md-12");
     table_name.classList.add("table-name");
+    table_name.innerHTML = text;
+
     body_col.appendChild(table_name);
     body.appendChild(body_col);
+
     return body
+}
+
+function generate_table_card_footer(num_resources, num_fields) {
+    const footer = document.createElement("div");
+    const footer_col = document.createElement("div");
+    const metadata = document.createElement("p");
+    const rlabel = num_resources == 1 ? "resource" : "resources";
+    const flabel = num_fields == 1 ? "field" : "fields";
+
+    footer.classList.add("row");
+    footer_col.classList.add("col-md-12");
+    metadata.classList.add("table-metadata");
+
+    metadata.innerHTML = `(${num_fields} ${flabel} across ${num_resources} ${rlabel})`;
+
+    footer_col.appendChild(metadata);
+    footer.appendChild(footer_col);
+
+    return footer
 }
