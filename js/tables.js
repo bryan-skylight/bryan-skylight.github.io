@@ -179,7 +179,7 @@ function generate_table_card_header() {
     edit_icon.classList.add("edit-icon");
     edit_icon.id = "edit-icon-".concat(UNIQ_TABLE_ID.toString());
     edit_icon.src = "assets/pencil.svg";
-    edit_icon.alt = "Penicl Icon";
+    edit_icon.alt = "Pencil Icon";
 
     edit_button.appendChild(edit_icon);
     edit_col.appendChild(edit_button);
