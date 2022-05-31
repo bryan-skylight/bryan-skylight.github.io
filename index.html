@@ -9,6 +9,7 @@
     <script src="js/fields.js"></script>
     <script src="js/resources.js"></script>
     <script src="js/tables.js"></script>
+    <script src="js/download.js"></script>
     <script src="js/listeners.js"></script>
 </head>
 
@@ -91,6 +92,53 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="downloadModalLabel">Download Schema</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p style="margin-bottom:0;">Enter a name for the file (or leave blank for default):</p>
+                    <input type="text" id="filename" placeholder="phdi_generated_schema.json">
+                    <p style="margin-top:2rem">Choose which format to use for the schema:</p>
+                    <div>
+                        <input type="radio" id="json" name="file-format" value="JSON" checked>
+                        <label for="json">JSON</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" id="yaml" name="file-format" value="YAML">
+                        <label for="yaml">YAML</label><br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="handle_download_modal_cancel()">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="download()">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="noSavedTablesModal" tabindex="-1" aria-labelledby="noSavedTablesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noSavedTablesModalLabel">No Saved Tables</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>No tables have been saved, and thus there is nothing to download. Please create at least one
+                        table in order to download a schema.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                        onclick="hide_modal('noSavedTablesModal')">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div id="nav" class="row">
             <div class="col-md-12">
@@ -117,8 +165,9 @@
                             title="Upload an existing schema in order to modify it">Upload Schema</button>
                     </div>
                     <div class="col-md-5">
-                        <button id="download-schema" class="action-button" type="button" onclick="download()"
-                            title="Download the schema you've built">Download Schema</button>
+                        <button id="download-schema" class="action-button" type="button"
+                            onclick="check_for_saved_tables()" title="Download the schema you've built">Download
+                            Schema</button>
                     </div>
                 </div>
             </div>

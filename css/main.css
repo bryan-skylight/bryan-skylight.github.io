@@ -14,6 +14,13 @@ body {
     width: 100%;
 }
 
+.btn-primary,
+.btn-primary:hover {
+    background-color: #074b69;
+    color: #fff;
+    border-color: #074b69;
+}
+
 #table-name-warning {
     color: red;
     font-size: 12px;
