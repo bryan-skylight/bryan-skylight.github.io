@@ -49,8 +49,9 @@
                         data from, which fields you want from those Resources, as well as what conditions you'd like
                         applied to those fields.</p>
                     <p>To get started, click on any of the Resources (e.g. Patient) in the list of available FHIR
-                        resources. The Resources are categorized according to <a
-                            href="https://www.hl7.org/fhir/resourcelist.html">the FHIR specification</a> and is intended
+                        Resources. The Resources are categorized according to <a
+                            href="https://www.hl7.org/fhir/resourcelist.html">the FHIR specification</a>, which is
+                        intended
                         to help you quickly locate the Resources you want.</p>
                     <p>Once you've selected a resource, you'll see a table appear that contains all of the fields
                         available in that Resource. Click the checkbox next to any field you'd like to include in your
@@ -191,7 +192,8 @@
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button id="bug-button" title="Submit a bug or feature request to the developers">
+                        <button id="bug-button" title="Submit a bug or feature request to the developers"
+                            onclick="show_modal('notImplementedModal')">
                             <img id="bug-icon" src="assets/bug.svg" alt="Bug icon">
                         </button>
                     </div>
