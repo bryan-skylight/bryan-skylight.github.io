@@ -13,14 +13,15 @@ function add_field_to_table(table, resource, row_num) {
     const fhir_name = fields[1].textContent;
     const new_name = fields[5].firstChild.value;
 
+    resource = title_case(resource);
     let parameters = {
+        "fhir_path": FIELD_MAP[resource][fhir_name],
         "include_nulls": fields[2].firstChild.checked,
         "include_unknowns": fields[3].firstChild.checked,
         "value": fields[4].firstChild.value,
         "new_name": is_valid_name(new_name) ? new_name : make_valid_name(fhir_name)
     };
 
-    resource = title_case(resource);
     if (!(resource in table)) {
         table[resource] = {};
     }

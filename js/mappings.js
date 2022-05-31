@@ -35,7 +35,7 @@ let FIELD_MAP = {
     "Subscription Status": {},
     "Subscription Topic": {},
     "Patient": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Patient/identifier",
         "Active": "",
         "Name": "",
         "First Name": "",
@@ -76,7 +76,7 @@ let FIELD_MAP = {
         "Link Type": ""
     },
     "Practitioner": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Practitioner/identifier",
         "Active": "",
         "Name": "",
         "First Name": "",
@@ -99,7 +99,7 @@ let FIELD_MAP = {
     },
     "Practitioner Role": {},
     "Related Person": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Related-Person/identifier",
         "Active": "",
         "Patient": "",
         "Relationship": "",
@@ -124,7 +124,7 @@ let FIELD_MAP = {
     "Person": {},
     "Group": {},
     "Organization": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Organization/identifier",
         "Active": "",
         "Type": "",
         "Name": "",
@@ -147,7 +147,7 @@ let FIELD_MAP = {
     "Organization Affiliation": {},
     "Healthcare Service": {},
     "Endpoint": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Endpoint/identifier",
         "Status": "",
         "Connection Type": "",
         "Name": "",
@@ -179,7 +179,7 @@ let FIELD_MAP = {
     "Allergy Intolerance": {},
     "Adverse Event": {},
     "Condition": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Condition/identifier",
         "Clinical Status": "",
         "Verification Status": "",
         "Category": "",
@@ -213,7 +213,7 @@ let FIELD_MAP = {
     "Clinical Impression": {},
     "Detected Issue": {},
     "Observation": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Observation/identifier",
         "Based On": "",
         "Part Of": "",
         "Status": "",
@@ -272,7 +272,7 @@ let FIELD_MAP = {
     },
     "Media": {},
     "Diagnostic Report": {
-        "Identifier": "",
+        "Identifier": "/resources/resource/entry/Diagnostic-Report/identifier",
         "Based On": "",
         "Status": "",
         "Category": "",
