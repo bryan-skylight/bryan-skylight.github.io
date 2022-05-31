@@ -32,7 +32,7 @@ function generate_field_table_header(resource) {
 
     const value = document.createElement("th");
     value.title = "If the field contains multiple values, which value should be returned?";
-    value.innerHTML = "Value"
+    value.innerHTML = "Selection<br />Criteria"
 
     const new_name = document.createElement("th");
     new_name.title = "Enter how the name should appear in your new table. If left blank, the default name will be used.";
