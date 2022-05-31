@@ -12,6 +12,25 @@ function check_for_saved_tables() {
     }
 }
 
+function convert_to_yaml() {
+    let config = "---\n";
+    for (let table of Object.keys(SAVED_TABLES)) {
+        config += `${table}:\n`
+        for (let resource of Object.keys(SAVED_TABLES[table])) {
+            config += `  ${resource}:\n`;
+            for (let field of Object.keys(SAVED_TABLES[table][resource])) {
+                config += `    ${field}:\n`;
+                for (let parameter of Object.keys(SAVED_TABLES[table][resource][field])) {
+                    let value = SAVED_TABLES[table][resource][field][parameter];
+                    config += `      ${parameter}: ${value}\n`;
+                }
+            }
+        }
+    }
+    config += "---";
+    return config
+}
+
 function download() {
     // extract inputs from modal
     const filename_input = document.getElementById("filename");
@@ -28,7 +47,12 @@ function download() {
 
     // create variables that we'll need
     filename = filename === "" ? "phdi_generated_schema.".concat(format) : filename_input.value
-    const data = JSON.stringify(SAVED_TABLES);
+    let data;
+    if (format === "json") {
+        data = JSON.stringify(SAVED_TABLES);
+    } else {
+        data = convert_to_yaml(SAVED_TABLES);
+    }
     const blob = new Blob([data], { type: `text/${format};charset=utf-8` })
     const url = URL.createObjectURL(blob);
 
