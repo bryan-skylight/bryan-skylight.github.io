@@ -46,7 +46,10 @@ function download() {
     hide_modal("downloadModal");
 
     // create variables that we'll need
-    filename = filename === "" ? "phdi_generated_schema.".concat(format) : filename_input.value
+    filename = filename === "" ? "phdi_generated_schema.".concat(format) : filename;
+    if (!(filename.endsWith("json")) && !(filename.endsWith("yaml"))) {
+        filename = filename.concat(`.${format}`);
+    }
     let data;
     if (format === "json") {
         data = JSON.stringify(SAVED_TABLES);
